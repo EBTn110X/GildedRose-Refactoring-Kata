@@ -1,46 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
+using GildedRoseKata.Items;
 
 namespace GildedRoseKata
 {
     public class Program
     {
+        private const int MinimumDay = 0;
+        private const int MaximumDay = 31;
+        private const string StartYell = "OMGHAI!";
+
         public static void Main(string[] args)
         {
-            Console.WriteLine("OMGHAI!");
+            Console.WriteLine(StartYell);
 
-            IList<Item> Items = new List<Item>{
-                new Item {Name = ProductNames.Vest, SellInDays = 10, Quality = 20},
-                new Item {Name = ProductNames.Brie, SellInDays = 2, Quality = 0},
-                new Item {Name = ProductNames.Elixir, SellInDays = 5, Quality = 7},
-                new Item {Name = ProductNames.Sulfuras, SellInDays = 0, Quality = 80},
-                new Item {Name = ProductNames.Sulfuras, SellInDays = -1, Quality = 80},
-                new Item
-                {
-                    Name = ProductNames.BackstagePass,
-                    SellInDays = 15,
-                    Quality = 20
-                },
-                new Item
-                {
-                    Name = ProductNames.BackstagePass,
-                    SellInDays = 10,
-                    Quality = 49
-                },
-                new Item
-                {
-                    Name = ProductNames.BackstagePass,
-                    SellInDays = 5,
-                    Quality = 49
-                },
-				// this conjured item does not work properly yet
-				new Item {Name = ProductNames.Conjured, SellInDays = 3, Quality = 6}
-            };
+            IList<Item> Items = [
+                new StandardItem(ProductNames.Vest, sellInDays: 10, quality: 20),
+                new Brie(sellInDays: 2, quality: 0),
+                new StandardItem(ProductNames.Elixir, sellInDays: 5, quality: 7),
+                new Sulfuras(sellInDays: 0),
+                new Sulfuras(sellInDays: -1),
+                new BackstagePass(sellInDays: 15, quality: 20),
+                new BackstagePass(sellInDays: 10, quality: 49),
+                new BackstagePass(sellInDays: 5, quality: 49),
+                new ConjuredItem(sellInDays: 3, quality: 6)
+            ];
 
             var app = new GildedRose(Items);
 
-
-            for (var i = 0; i < 31; i++)
+            for (var i = MinimumDay; i < MaximumDay; i++)
             {
                 Console.WriteLine("-------- day " + i + " --------");
                 Console.WriteLine("name, sellInDays, quality");
