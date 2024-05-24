@@ -10,15 +10,15 @@ namespace GildedRoseKata
             this.Items = Items;
         }
 
-        public void UpdateQuality()
+        public void UpdateItems()
         {
             for (var i = 0; i < Items.Count; i++)
             {
-                if (Items[i].Name != "Aged Brie" && Items[i].Name != "Backstage passes to a TAFKAL80ETC concert")
+                if (Items[i].Name != ProductNames.Brie && Items[i].Name != ProductNames.BackstagePass)
                 {
-                    if (Items[i].Quality > 0)
+                    if (Items[i].Quality > Quality.MinimalQuality)
                     {
-                        if (Items[i].Name != "Sulfuras, Hand of Ragnaros")
+                        if (Items[i].Name != ProductNames.Sulfuras)
                         {
                             Items[i].Quality = Items[i].Quality - 1;
                         }
@@ -26,23 +26,23 @@ namespace GildedRoseKata
                 }
                 else
                 {
-                    if (Items[i].Quality < 50)
+                    if (Items[i].Quality < Quality.MidQuality)
                     {
                         Items[i].Quality = Items[i].Quality + 1;
 
-                        if (Items[i].Name == "Backstage passes to a TAFKAL80ETC concert")
+                        if (Items[i].Name == ProductNames.BackstagePass)
                         {
-                            if (Items[i].SellIn < 11)
+                            if (Items[i].SellInDays < SellingDays.DayEleven)
                             {
-                                if (Items[i].Quality < 50)
+                                if (Items[i].Quality < Quality.MidQuality)
                                 {
                                     Items[i].Quality = Items[i].Quality + 1;
                                 }
                             }
 
-                            if (Items[i].SellIn < 6)
+                            if (Items[i].SellInDays < SellingDays.DaySix)
                             {
-                                if (Items[i].Quality < 50)
+                                if (Items[i].Quality < Quality.MidQuality)
                                 {
                                     Items[i].Quality = Items[i].Quality + 1;
                                 }
@@ -51,20 +51,20 @@ namespace GildedRoseKata
                     }
                 }
 
-                if (Items[i].Name != "Sulfuras, Hand of Ragnaros")
+                if (Items[i].Name != ProductNames.Sulfuras)
                 {
-                    Items[i].SellIn = Items[i].SellIn - 1;
+                    Items[i].SellInDays = Items[i].SellInDays - 1;
                 }
 
-                if (Items[i].SellIn < 0)
+                if (Items[i].SellInDays < 0)
                 {
-                    if (Items[i].Name != "Aged Brie")
+                    if (Items[i].Name != ProductNames.Brie)
                     {
-                        if (Items[i].Name != "Backstage passes to a TAFKAL80ETC concert")
+                        if (Items[i].Name != ProductNames.BackstagePass)
                         {
-                            if (Items[i].Quality > 0)
+                            if (Items[i].Quality > Quality.MinimalQuality)
                             {
-                                if (Items[i].Name != "Sulfuras, Hand of Ragnaros")
+                                if (Items[i].Name != ProductNames.Sulfuras)
                                 {
                                     Items[i].Quality = Items[i].Quality - 1;
                                 }
@@ -77,7 +77,7 @@ namespace GildedRoseKata
                     }
                     else
                     {
-                        if (Items[i].Quality < 50)
+                        if (Items[i].Quality < Quality.MidQuality)
                         {
                             Items[i].Quality = Items[i].Quality + 1;
                         }
